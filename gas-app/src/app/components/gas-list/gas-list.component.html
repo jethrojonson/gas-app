@@ -1,0 +1,15 @@
+<table class="table table-dark table-striped-columns text-center">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Gasoleo A</th>
+      <th scope="col">Gasoleo Premium</th>
+      <th scope="col">Gasolina 98 E5</th>
+      <th scope="col">Gasolina 95 E5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr app-gas-item *ngFor="let gasSt of gasStList" [gasSt]="gasSt"></tr>
+  </tbody>
+</table>

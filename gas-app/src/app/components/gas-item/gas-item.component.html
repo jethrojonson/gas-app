@@ -1,0 +1,24 @@
+<th>{{ gasSt["IDEESS"] }}</th>
+<td style="width: 60px;">{{ gasSt["Rótulo"] }}</td>
+<td *ngIf="gasSt['Precio Gasoleo A']!=''">{{ gasSt["Precio Gasoleo A"] }} €</td>
+<td *ngIf="gasSt['Precio Gasoleo A']==''">—————</td>
+<td *ngIf="gasSt['Precio Gasoleo Premium']!=''">{{ gasSt["Precio Gasoleo Premium"] }} €</td>
+<td *ngIf="gasSt['Precio Gasoleo Premium']==''">—————</td>
+<td *ngIf="gasSt['Precio Gasolina 98 E5']!=''">{{ gasSt["Precio Gasolina 98 E5"] }} €</td>
+<td *ngIf="gasSt['Precio Gasolina 98 E5']==''">—————</td>
+<td *ngIf="gasSt['Precio Gasolina 95 E5']!=''">{{ gasSt["Precio Gasolina 95 E5"] }} €</td>
+<td *ngIf="gasSt['Precio Gasolina 95 E5']==''">—————</td>
+<!-- 'Precio Biodiesel': string;
+'Precio Bioetanol': string;
+'Precio Gas Natural Comprimido': string;
+'Precio Gas Natural Licuado': string;
+'Precio Gases licuados del petróleo': string;
+'Precio Gasoleo A': string;
+'Precio Gasoleo B': string;
+'Precio Gasoleo Premium': string;
+'Precio Gasolina 95 E10': string;
+'Precio Gasolina 95 E5': string;
+'Precio Gasolina 95 E5 Premium': string;
+'Precio Gasolina 98 E10': string;
+'Precio Gasolina 98 E5': string;
+'Precio Hidrogeno': string; -->
