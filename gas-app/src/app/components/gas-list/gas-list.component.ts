@@ -10,6 +10,8 @@ import { GasService } from 'src/app/services/gas.service';
 export class GasListComponent implements OnInit {
 
   gasStList : GasStation[] = [];
+  gasStListFiltered : GasStation[] = [];
+  isFiltered : boolean = false;
 
   constructor(private gasService : GasService) { }
 
@@ -22,5 +24,7 @@ export class GasListComponent implements OnInit {
       this.gasStList = resp['ListaEESSPrecio']
     })
   }
+
+
 
 }
