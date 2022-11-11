@@ -1,5 +1,5 @@
 <div class="row justify-content-center my-5">
-  <div class="col-5 text-center dropdown dropdown-center">
+  <div class="col-3 text-center dropdown dropdown-center">
     <button
       type="button"
       class="btn btn-primary dropdown-toggle border border-5 rounded-5 border-secondary"
@@ -25,27 +25,52 @@
       <li><h3 class="dropdown-header fw-bold">FILTRADO POR PRECIO</h3></li>
       <li><h5 class="dropdown-header fw-bold">Eliga combustible</h5></li>
       <li><hr class="dropdown-divider" /></li>
-      <li><a class="dropdown-item btn">Gasoleo A</a></li>
-      <li><a class="dropdown-item btn">Gasoleo Premium</a></li>
-      <li><a class="dropdown-item btn">Gasolina 98 E5</a></li>
-      <li><a class="dropdown-item btn">Gasolina 95 E5</a></li>
+      <li>
+        <a
+          class="dropdown-item btn"
+          (click)="getMinMaxPrice('Precio Gasoleo A')"
+          >Gasoleo A</a
+        >
+      </li>
+      <li>
+        <a
+          class="dropdown-item btn"
+          (click)="getMinMaxPrice('Precio Gasoleo Premium')"
+          >Gasoleo Premium</a
+        >
+      </li>
+      <li>
+        <a
+          class="dropdown-item btn"
+          (click)="getMinMaxPrice('Precio Gasolina 98 E5')"
+          >Gasolina 98 E5</a
+        >
+      </li>
+      <li>
+        <a
+          class="dropdown-item btn"
+          (click)="getMinMaxPrice('Precio Gasolina 95 E5')"
+          >Gasolina 95 E5</a
+        >
+      </li>
     </ul>
   </div>
-  <div class="col bg-light rounded-5 pt-2 me-5">
+  <div *ngIf="isFiltered" class="col-5 bg-light rounded-5 pt-2 me-5">
     <div class="col container row">
       <div class="col-4 text-end pt-1">
         <label for="max" class="form-label fw-bold fs-5">Precio Máximo</label>
       </div>
       <div class="col-8 pt-2 text-center">
         <input
+          [(ngModel)]="maxPriceSelected"
           type="range"
           class="form-range w-75"
-          min="0"
-          max="5"
-          step="0.01"
+          [min]="minPriceSelected+0.01"
+          [max]="maxPrice"
+          step="0.001"
           id="max"
         />
-        <span class="ms-3 fw-bold fs-5"> 0,00 €</span>
+        <span *ngIf="maxPriceSelected!=0" class="ms-3 fw-bold fs-5"> {{ maxPriceSelected.toFixed(2) }} €</span>
       </div>
     </div>
     <div class="col container row">
@@ -54,20 +79,36 @@
       </div>
       <div class="col-8 pt-2 text-center">
         <input
+          [(ngModel)]="minPriceSelected"
           type="range"
           class="form-range w-75"
-          min="0"
-          max="5"
-          step="0.01"
+          [min]="minPrice"
+          [max]="maxPriceSelected-0.01"
+          step="0.001"
           id="min"
         />
-        <span class="ms-3 fw-bold fs-5"> 0,00 €</span>
+        <span *ngIf="minPriceSelected!=0" class="ms-3 fw-bold fs-5"> {{ minPriceSelected.toFixed(2) }} €</span>
       </div>
     </div>
   </div>
 </div>
 
-<div class="w-75 mx-auto">
+<div class="w-75 mx-auto text-center">
+  <span
+    *ngIf="fuelTypeSelected != 'C.P.'"
+    class="mx-2 px-2 fw-bold fs-4 bg-warning rounded-5 border boder-3 border-secondary"
+    >{{ fuelTypeSelected }}
+    <a class="btn rounded-5 pt-0 border-0" 
+      ><i class="bi bi-x-circle fs-4 text-danger"></i></a
+  ></span>
+
+  <!-- <button type="button" class="btn-close btn-close-white" disabled aria-label="Close"></button> -->
+  <!-- <span
+    class="mx-2 px-2 fw-bold fs-4 bg-warning rounded-5 border boder-3 border-secondary"
+    >Gasoleo A
+    <a class="btn rounded-5 pt-0"
+      ><i class="bi bi-x-circle fs-4 text-danger"></i></a
+  ></span> -->
   <table
     class="table table-dark table-striped-columns text-center border border-3 border-secondary"
   >
