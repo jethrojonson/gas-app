@@ -53,7 +53,6 @@ export class GasListComponent implements OnInit {
     this.fuelTypeSelected = fuelType;
     this.isFuelFiltered = true;
     this.getFuelFilteredList();
-    this.sortList(this.gasStListFuelFiltered);
   }
 
   public getFuelFilteredList() {
@@ -63,9 +62,10 @@ export class GasListComponent implements OnInit {
         +(gasolinera[this.fuelTypeSelected].replace(',', '.')) <
           this.maxPriceSelected
     );
+    this.sortList(this.gasStListFuelFiltered);
   }
 
   public sortList(lista : GasStation[]){
-    lista.sort((a,b) => +a[this.fuelTypeSelected].replace(',', '.') - +b[this.fuelTypeSelected].replace(',', '.'))
+    lista.sort((a,b) => (+a[this.fuelTypeSelected].replace(',', '.')) - (+b[this.fuelTypeSelected].replace(',', '.')))
   }
 }
