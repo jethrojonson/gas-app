@@ -54,14 +54,16 @@
         >
       </li>
     </ul>
-  </div>
-  <div *ngIf="isFiltered" class="col-5 bg-light rounded-5 pt-2 me-5">
+  </div >
+
+  <div *ngIf="isFuelFiltered" class="col-5 bg-light rounded-5 pt-2 me-5">
     <div class="col container row">
       <div class="col-4 text-end pt-1">
         <label for="max" class="form-label fw-bold fs-5">Precio Máximo</label>
       </div>
       <div class="col-8 pt-2 text-center">
         <input
+          (change)="getFuelFilteredList()"
           [(ngModel)]="maxPriceSelected"
           type="range"
           class="form-range w-75"
@@ -79,6 +81,7 @@
       </div>
       <div class="col-8 pt-2 text-center">
         <input
+         (change)="getFuelFilteredList()"
           [(ngModel)]="minPriceSelected"
           type="range"
           class="form-range w-75"
@@ -95,14 +98,14 @@
 
 <div class="w-75 mx-auto text-center">
   <span
-    *ngIf="fuelTypeSelected != 'C.P.'"
+    *ngIf="isFuelFiltered"
     class="mx-2 px-2 fw-bold fs-4 bg-warning rounded-5 border boder-3 border-secondary"
-    >{{ fuelTypeSelected }}
-    <a class="btn rounded-5 pt-0 border-0" 
+    >{{ fuelTypeSelected.split("Precio")[1] }}
+    <a class="btn rounded-5 pt-0 ps-0 pe-0 pb-2 border-0" (click)="isFuelFiltered=false"
       ><i class="bi bi-x-circle fs-4 text-danger"></i></a
   ></span>
 
-  <!-- <button type="button" class="btn-close btn-close-white" disabled aria-label="Close"></button> -->
+
   <!-- <span
     class="mx-2 px-2 fw-bold fs-4 bg-warning rounded-5 border boder-3 border-secondary"
     >Gasoleo A
@@ -122,8 +125,11 @@
         <th scope="col">Gasolina 95 E5</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!isFuelFiltered">
       <tr app-gas-item *ngFor="let gasSt of gasStList" [gasSt]="gasSt"></tr>
+    </tbody>
+    <tbody *ngIf="isFuelFiltered">
+      <tr app-gas-item *ngFor="let gasSt of gasStListFuelFiltered" [gasSt]="gasSt"></tr>
     </tbody>
   </table>
 </div>

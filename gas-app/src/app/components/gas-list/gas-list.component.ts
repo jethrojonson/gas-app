@@ -11,9 +11,9 @@ import { GasService } from 'src/app/services/gas.service';
 })
 export class GasListComponent implements OnInit {
   gasStList: GasStation[] = [];
-  gasStListFiltered: GasStation[] = [];
+  gasStListFuelFiltered: GasStation[] = [];
 
-  isFiltered: boolean = false;
+  isFuelFiltered: boolean = false;
   minPrice: number = 0;
   maxPrice: number = 0;
   minPriceSelected: number = 0;
@@ -30,7 +30,7 @@ export class GasListComponent implements OnInit {
 
   public getGasStList() {
     this.gasService.getGasStList().subscribe((resp) => {
-      this.gasStList = resp['ListaEESSPrecio'].slice(0,400);
+      this.gasStList = resp['ListaEESSPrecio'].slice(0, 400);
     });
   }
 
@@ -46,11 +46,26 @@ export class GasListComponent implements OnInit {
         max > current ? max : (max = current);
       }
     });
-
     this.maxPrice = max;
+    this.maxPriceSelected = max;
     this.minPrice = min;
-
+    this.minPriceSelected = min;
     this.fuelTypeSelected = fuelType;
-    this.isFiltered = true;
+    this.isFuelFiltered = true;
+    this.getFuelFilteredList();
+    this.sortList(this.gasStListFuelFiltered);
+  }
+
+  public getFuelFilteredList() {
+    this.gasStListFuelFiltered = this.gasStList.filter((gasolinera) =>
+      +(gasolinera[this.fuelTypeSelected].replace(',', '.')) >
+        this.minPriceSelected &&
+        +(gasolinera[this.fuelTypeSelected].replace(',', '.')) <
+          this.maxPriceSelected
+    );
+  }
+
+  public sortList(lista : GasStation[]){
+    lista.sort((a,b) => +a[this.fuelTypeSelected].replace(',', '.') - +b[this.fuelTypeSelected].replace(',', '.'))
   }
 }
